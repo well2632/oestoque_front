@@ -23,10 +23,12 @@ function App() {
 
   const [showDeleteModal, setShowDeleteModal] = useState(false);
 
+  const loggedUser = JSON.parse(localStorage.getItem("user"));
+
   const navigate = useNavigate();
 
   function fetchProducts() {
-    fetch("http://localhost:3000/user/a8b51f10-10a8-46ee-ae25-e9ca471906ab/produtos")
+    fetch(`http://localhost:3000/user/${loggedUser.id}/produtos`)
       .then((response) => response.json())
       .then((data) => {
         console.log(data);

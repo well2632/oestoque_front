@@ -10,6 +10,7 @@ import { setLocale } from "yup";
 
 export default function CreateProductPage() {
   const navigate = useNavigate();
+  const loggedUser = JSON.parse(localStorage.getItem("user"));
 
   setLocale({
     mixed: {
@@ -46,7 +47,7 @@ export default function CreateProductPage() {
       body: JSON.stringify({
         ...data,
         quantity: parseInt(data.quantity),
-        userId: "a8b51f10-10a8-46ee-ae25-e9ca471906ab",
+        userId: loggedUser.id,
       }),
     })
       .then((response) => response.json())

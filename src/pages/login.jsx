@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import { useForm } from "react-hook-form";
 import Button from "../components/button";
@@ -39,23 +39,35 @@ export default function Login() {
   } = useForm({ resolver: yupResolver(schema) });
 
   const onSubmit = (data) => {
-    console.log({ ...data, userId: "a8b51f10-10a8-46ee-ae25-e9ca471906ab" });
-    fetch(`http://localhost:3000/product`, {
+    fetch(`http://localhost:3000/user/login`, {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
       },
       body: JSON.stringify({
-        ...data,
-        quantity: parseInt(data.quantity),
-        userId: "a8b51f10-10a8-46ee-ae25-e9ca471906ab",
+        email: data.email,
+        password: data.password,
       }),
     })
       .then((response) => response.json())
       .then((data) => {
-        navigate("/");
+        if (data.id) {
+          localStorage.setItem("user", JSON.stringify({ ...data }));
+          navigate("/");
+        } else if (data.error) {
+          console.log("entrou em erro normal");
+        } else {
+          console.log("entrou em erro servidor");
+        }
       });
   };
+
+  useEffect(() => {
+    if (localStorage.getItem("user")) {
+      navigate("/");
+    }
+  }, []);
+
   return (
     <div className="page-login">
       <form onSubmit={handleSubmit(onSubmit)} className="form-login">

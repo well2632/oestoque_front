@@ -6,15 +6,24 @@ import { createBrowserRouter, RouterProvider } from "react-router-dom";
 import CreateProductPage from "./pages/product/createProductPage";
 import Login from "./pages/login";
 import Register from "./pages/register";
+import PrivatePage from "./components/privatePage";
 
 const router = createBrowserRouter([
   {
     path: "/",
-    element: <App />,
+    element: (
+      <PrivatePage>
+        <App />
+      </PrivatePage>
+    ),
   },
   {
     path: "novo-produto",
-    element: <CreateProductPage />,
+    element: (
+      <PrivatePage>
+        <CreateProductPage />{" "}
+      </PrivatePage>
+    ),
   },
   {
     path: "/login",
