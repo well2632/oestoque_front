@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { useForm } from "react-hook-form";
 import Button from "../components/button";
@@ -9,6 +9,8 @@ import { Link } from "react-router-dom";
 
 export default function Login() {
   const navigate = useNavigate();
+
+  const [authError, setAuthError] = useState("");
 
   setLocale({
     mixed: {
@@ -39,6 +41,7 @@ export default function Login() {
   } = useForm({ resolver: yupResolver(schema) });
 
   const onSubmit = (data) => {
+    setAuthError("");
     fetch(`${process.env.REACT_APP_API_URL}/user/login`, {
       method: "POST",
       headers: {
@@ -55,9 +58,9 @@ export default function Login() {
           localStorage.setItem("user", JSON.stringify({ ...data }));
           navigate("/");
         } else if (data.error) {
-          console.log("entrou em erro normal");
+          setAuthError("E-mail ou senha inválidos!");
         } else {
-          console.log("entrou em erro servidor");
+          setAuthError("Servidor fora do ar!");
         }
       });
   };
@@ -73,6 +76,7 @@ export default function Login() {
       <form onSubmit={handleSubmit(onSubmit)} className="form-login">
         <h4 className="logo-login">oestoque</h4>
         <div className="input-list">
+          {authError && <div className="generic-error">{authError}</div>}
           <div className="input-group">
             <label for="email">E-mail</label>
             <input
@@ -95,7 +99,10 @@ export default function Login() {
               placeholder="Informe sua senha"
             />
             {errors.password && (
-              <span className="input-group-error">{errors.password?.message} </span>
+              <span className="input-group-error">
+                {errors.password?.message}
+                {!errors.password && <div>teste</div>}
+              </span>
             )}
           </div>
         </div>

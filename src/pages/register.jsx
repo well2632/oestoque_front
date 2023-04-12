@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { useForm } from "react-hook-form";
 import Button from "../components/button";
@@ -9,6 +9,7 @@ import { Link } from "react-router-dom";
 
 export default function Login() {
   const navigate = useNavigate();
+  const [authError, setAuthError] = useState("");
 
   setLocale({
     mixed: {
@@ -44,6 +45,7 @@ export default function Login() {
   } = useForm({ resolver: yupResolver(schema) });
 
   const onSubmit = (data) => {
+    setAuthError("");
     fetch(`${process.env.REACT_APP_API_URL}/user/register`, {
       method: "POST",
       headers: {
@@ -55,12 +57,17 @@ export default function Login() {
       }),
     })
       .then((response) => response.json())
+      .catch((err) => {
+        setAuthError("Problema no servidor!");
+        console.error(err);
+      })
       .then((data) => {
         if (data.id) {
           localStorage.setItem("user", JSON.stringify({ ...data }));
           navigate("/");
         } else if (data.error) {
           console.log("entrou em erro normal");
+          setAuthError(data.error);
         } else {
           console.log("entrou em erro servidor");
         }
@@ -78,6 +85,7 @@ export default function Login() {
       <form onSubmit={handleSubmit(onSubmit)} className="form-login">
         <h4 className="logo-login">oestoque</h4>
         <div className="input-list">
+          {authError && <div className="generic-error">{authError}</div>}
           <div className="input-group">
             <label for="email">E-mail</label>
             <input

@@ -25,6 +25,15 @@
             gap: 24px;
         }
 
+        .generic-error {
+            color: red;
+            font-size: 14px;
+            background-color: rgb(255, 225, 225);
+            width: 100%;
+            padding: 8px 0;
+            text-align: center;
+        }
+
         .button-container {
             width: 100%;
             display: flex;
