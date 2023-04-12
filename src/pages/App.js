@@ -28,7 +28,7 @@ function App() {
   const navigate = useNavigate();
 
   function fetchProducts() {
-    fetch(`http://localhost:3000/user/${loggedUser.id}/produtos`)
+    fetch(`${process.env.REACT_APP_API_URL}/user/${loggedUser.id}/produtos`)
       .then((response) => response.json())
       .then((data) => {
         console.log(data);

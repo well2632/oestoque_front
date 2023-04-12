@@ -44,7 +44,7 @@ export default function Login() {
   } = useForm({ resolver: yupResolver(schema) });
 
   const onSubmit = (data) => {
-    fetch(`http://localhost:3000/user/register`, {
+    fetch(`${process.env.REACT_APP_API_URL}/user/register`, {
       method: "POST",
       headers: {
         "Content-Type": "application/json",

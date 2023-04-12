@@ -17,7 +17,7 @@ export default function EditProductModal({
   }, [isActive]);
 
   function doOperation() {
-    fetch(`http://localhost:3000/product/${product.id}`, {
+    fetch(`${process.env.REACT_APP_API_URL}/product/${product.id}`, {
       method: "PATCH",
       headers: {
         "Content-Type": "application/json",

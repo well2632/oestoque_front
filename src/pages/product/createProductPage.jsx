@@ -39,7 +39,7 @@ export default function CreateProductPage() {
 
   const onSubmit = (data) => {
     console.log({ ...data, userId: "a8b51f10-10a8-46ee-ae25-e9ca471906ab" });
-    fetch(`http://localhost:3000/product`, {
+    fetch(`${process.env.REACT_APP_API_URL}/product`, {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
