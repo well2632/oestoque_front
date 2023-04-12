@@ -1,0 +1,33 @@
+.number-controller {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 12px;
+
+    &__button {
+        width: 32px;
+        height: 32px;
+        border-radius: 200px;
+        outline: none;
+        border: none;
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        cursor: pointer;
+        background-color: #FFF;
+        border: 1px solid $main-color;
+
+        img {
+            width: 16px;
+            fill: red;
+            color: red;
+        }
+
+        &:hover {
+            // opacity: .9;
+            filter: contrast(85%);
+        }
+    }
+
+    &__value {}
+}

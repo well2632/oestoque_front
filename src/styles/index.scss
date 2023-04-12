@@ -1,0 +1,19 @@
+// General
+@import './general/font.scss';
+@import './general/reset.scss';
+@import './general/variables.scss';
+
+// Components
+@import './components/header.scss';
+@import './components/sectionTitle.scss';
+@import './components/button.scss';
+@import './components/input.scss';
+@import './components/table.scss';
+@import './components/numberController.scss';
+@import './components/modal.scss';
+@import './components/inputGroup.scss';
+
+// Pages
+@import './pages/main.scss';
+@import './pages/createProductPage.scss';
+@import './pages/login.scss'

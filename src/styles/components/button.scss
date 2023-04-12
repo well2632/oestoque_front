@@ -1,0 +1,40 @@
+.button {
+
+    border-radius: 200px;
+    outline: none;
+    border: none;
+    font-size: 16px;
+    font-weight: 300;
+    cursor: pointer;
+
+    &.primary {
+        background-color: #007cff;
+        color: white;
+
+        &:focus, &:hover {
+            background-color: #0060c6;
+        }
+    }
+
+    &.secondary {
+        border: 1px solid #007cff;
+        color: #007cff;
+        background-color: #FFF;
+        font-size: #222;
+        &:focus, &:hover {
+            background-color: #fafafa;
+            border-color: #0060c6;
+            color: #0060c6;
+        }
+    }
+
+    &.md {
+        height: 40px;
+        padding: 0 40px;
+    }
+
+    &.sm {
+        height: 32px;
+        padding: 0 24px;
+    }
+}
